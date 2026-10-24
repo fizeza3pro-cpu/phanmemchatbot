@@ -1,0 +1,39 @@
+# Mẫu cấu hình LOCAL. Copy sang .dev.vars.local nếu file đó chưa tồn tại.
+# `npm.cmd run dev` dùng Wrangler --env local và đọc .dev.vars.local.
+# Chỉ điền credentials thật trong .dev.vars.local.
+
+# Cloudflare Workers AI: cần cả hai giá trị để gọi model thật.
+CLOUDFLARE_ACCOUNT_ID=""
+CLOUDFLARE_API_TOKEN=""
+
+# Google OAuth: có thể để trống khi dùng đăng nhập local.
+# Redirect URI: http://localhost:5173/api/auth/google/callback
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+
+# Cấu hình ứng dụng local.
+ENVIRONMENT="development"
+APP_ORIGIN="http://localhost:5173"
+ENABLE_DEV_AUTH="true"
+ADMIN_EMAILS="admin@example.test"
+# Tokenizer Llama + 2 token dự phòng; usage Cloudflare quyết định số đã dùng.
+TOKEN_COUNT_MODE="verified"
+
+# Model và hạn mức token: đăng nhập admin, mở http://localhost:5173/admin.
+# Các thay đổi mặc định áp dụng cho phiên chat mới.
+# Khởi động lại backend sau khi sửa file này.
+# Production: cấu hình vars/secrets qua Wrangler theo README.md.
+
+# Groq GPT-OSS
+GROQ_API_KEY=""
+
+# BytePlus ModelArk: API key và model ID hoặc endpoint ID ep-... của bạn.
+BYTEPLUS_API_KEY=""
+BYTEPLUS_BASE_URL="https://ark.ap-southeast.bytepluses.com/api/v3"
+BYTEPLUS_MODEL=""
+# Đặt context đúng model đã chọn; giá trị này được lưu cùng phiên mới.
+BYTEPLUS_CONTEXT_TOKENS="32768"
+# max_completion_tokens tính cả suy luận; chỉ đổi nếu model không hỗ trợ.
+BYTEPLUS_MAX_TOKENS_PARAMETER="max_completion_tokens"
+# disabled / enabled / auto / omit (không gửi trường thinking).
+BYTEPLUS_THINKING="disabled"

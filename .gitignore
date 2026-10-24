@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+dist/
+coverage/
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+*.log
+.playwright-cli/
+output/playwright/
+.npm-cache/

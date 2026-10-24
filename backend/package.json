@@ -1,0 +1,33 @@
+{
+  "name": "cloudflare-chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --env local --ip 127.0.0.1 --port 8787",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "wrangler deploy --env= --dry-run --outdir dist/worker",
+    "db:migrate:local": "wrangler d1 migrations apply chatbot-local --local --env local",
+    "db:migrate:remote": "wrangler d1 migrations apply chatbot-production --env= --remote",
+    "deploy": "wrangler deploy --env="
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "gpt-tokenizer": "^4.0.0",
+    "hono": "^4.13.13",
+    "llama3-tokenizer-js": "^1.2.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261005.1",
+    "@types/node": "^26.6.4",
+    "miniflare": "^5.20261001.0-alpha",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3",
+    "wrangler": "^4.147.0"
+  }
+}

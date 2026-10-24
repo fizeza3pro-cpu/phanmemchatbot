@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cloudflare-chatbot",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "minify": true,
+  "assets": {
+    "directory": "../frontend/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api", "/api/*"]
+  },
+  "vars": {
+    "ENVIRONMENT": "production",
+    "APP_ORIGIN": "https://replace-with-your-domain.example",
+    "ENABLE_DEV_AUTH": "false",
+    "TOKEN_COUNT_MODE": "verified"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "chatbot-production",
+    "database_id": "00000000-0000-0000-0000-000000000000",
+    "migrations_dir": "migrations"
+  }],
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "observability": { "enabled": true },
+  "env": {
+    "local": {
+      "name": "cloudflare-chatbot-local",
+      "vars": {
+        "ENVIRONMENT": "development",
+        "APP_ORIGIN": "http://localhost:5173",
+        "ENABLE_DEV_AUTH": "true",
+        "ADMIN_EMAILS": "admin@example.test",
+        "TOKEN_COUNT_MODE": "verified"
+      },
+      "d1_databases": [{
+        "binding": "DB",
+        "database_name": "chatbot-local",
+        "database_id": "00000000-0000-0000-0000-000000000000",
+        "migrations_dir": "migrations"
+      }]
+    }
+  }
+}
